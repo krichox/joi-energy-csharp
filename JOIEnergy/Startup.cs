@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebOS.JOIEnergy.Dependency.extension;
 
 namespace JOIEnergy
 {
@@ -49,9 +50,10 @@ namespace JOIEnergy
             };
 
             services.AddMvc();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IMeterReadingService, MeterReadingService>();
-            services.AddTransient<IPricePlanService, PricePlanService>();
+            services.AddDataService();
+            //services.AddTransient<IAccountService, AccountService>();
+            //services.AddTransient<IMeterReadingService, MeterReadingService>();
+            //services.AddTransient<IPricePlanService, PricePlanService>();
             services.AddSingleton((IServiceProvider arg) => readings);
             services.AddSingleton((IServiceProvider arg) => pricePlans);
             services.AddSingleton((IServiceProvider arg) => SmartMeterToPricePlanAccounts);
