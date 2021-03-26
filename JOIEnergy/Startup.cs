@@ -30,7 +30,7 @@ namespace JOIEnergy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.InitJOIEnergyDatas();
+            services.GenerateJOIEnergyDatas();
             services.AddDataService();
         }
 

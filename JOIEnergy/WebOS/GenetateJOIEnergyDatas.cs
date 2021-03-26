@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace JOIEnergy.WebOS
 {
     /// <summary>
-    ///  初始化数据
+    /// GenetateJOIEnergyDatas
     /// </summary>
-    public static class InitClassDatas
+    public static class GenetateJOIEnergyDatas
     {
-        public static IServiceCollection InitJOIEnergyDatas(this IServiceCollection services)
+        public static IServiceCollection GenerateJOIEnergyDatas(this IServiceCollection services)
         {
             var readings =
                 GenerateMeterElectricityReadings();
