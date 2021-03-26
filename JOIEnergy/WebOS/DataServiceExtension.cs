@@ -30,7 +30,7 @@ namespace WebOS.JOIEnergy.Dependency.extension
                     if (attrubuteArray != null && attrubuteArray.Length > 0)
                     {
                         var goalType = ((DependencyAttribute)attrubuteArray[0]).DependencyType;
-                        DIService(services, perGoalType, perImpl, goalType);
+                        GetDIService(services, perGoalType, perImpl, goalType);
                     }
                 }
             }
@@ -46,7 +46,7 @@ namespace WebOS.JOIEnergy.Dependency.extension
         /// <param name="perGoalType"></param>
         /// <param name="perImpl"></param>
         /// <param name="goalType"></param>
-        private static void DIService(IServiceCollection services, Type perGoalType, Type perImpl, Enum goalType)
+        private static void GetDIService(IServiceCollection services, Type perGoalType, Type perImpl, Enum goalType)
         {
             switch (goalType)
             {

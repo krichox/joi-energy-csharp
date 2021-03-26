@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using JOIEnergy.Domain;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JOIEnergy.Controllers
 {
+    [ApiController]
     [Route("readings")]
     public class MeterReadingController : Controller
     {
@@ -23,20 +25,20 @@ namespace JOIEnergy.Controllers
         [HttpPost ("store")]
         public ObjectResult Post([FromBody]MeterReadings meterReadings)
         {
-            if (!IsMeterReadingsValid(meterReadings)) {
-                return new BadRequestObjectResult("Internal Server Error");
-            }
+            //if (!IsMeterReadingsValid(meterReadings)) {
+            //    return new BadRequestObjectResult("Internal Server Error");
+            //}
             _meterReadingService.StoreReadings(meterReadings.SmartMeterId,meterReadings.ElectricityReadings);
             return new OkObjectResult("{}");
         }
 
-        private bool IsMeterReadingsValid(MeterReadings meterReadings)
-        {
-            String smartMeterId = meterReadings.SmartMeterId;
-            List<ElectricityReading> electricityReadings = meterReadings.ElectricityReadings;
-            return smartMeterId != null && smartMeterId.Any()
-                    && electricityReadings != null && electricityReadings.Any();
-        }
+        //private bool IsMeterReadingsValid(MeterReadings meterReadings)
+        //{
+        //    String smartMeterId = meterReadings.SmartMeterId;
+        //    List<ElectricityReading> electricityReadings = meterReadings.ElectricityReadings;
+        //    return smartMeterId != null && smartMeterId.Any()
+        //            && electricityReadings != null && electricityReadings.Any();
+        //}
 
         [HttpGet("read/{smartMeterId}")]
         public ObjectResult GetReading(string smartMeterId) {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using JOIEnergy.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace JOIEnergy.Controllers
 {
+    [ApiController]
     [Route("price-plans")]
     public class PricePlanComparatorController : Controller
     {
@@ -21,7 +23,7 @@ namespace JOIEnergy.Controllers
         }
 
         [HttpGet("compare-all/{smartMeterId}")]
-        public ObjectResult CalculatedCostForEachPricePlan(string smartMeterId)
+        public ObjectResult CalculatedCostForEachPricePlan([FromRoute][Required]string smartMeterId)
         {
             var pricePlanId = _accountService.GetPricePlanIdForSmartMeterId(smartMeterId);
             var costPerPricePlan = _pricePlanService.GetConsumptionCostOfElectricityReadingsForEachPricePlan(smartMeterId);
@@ -39,7 +41,7 @@ namespace JOIEnergy.Controllers
         }
 
         [HttpGet("recommend/{smartMeterId}")]
-        public ObjectResult RecommendCheapestPricePlans(string smartMeterId, int? limit = null) {
+        public ObjectResult RecommendCheapestPricePlans([FromRoute]string smartMeterId, int? limit = null) {
             var consumptionForPricePlans = _pricePlanService.GetConsumptionCostOfElectricityReadingsForEachPricePlan(smartMeterId);
 
             if (!consumptionForPricePlans.Any()) {
